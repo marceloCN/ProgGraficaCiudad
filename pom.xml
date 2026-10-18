@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Idenficacion del proyecto -->
+  <groupId>com.graphics</groupId>
+
+  <!-- nombre del artefacto -->
+  <artifactId>opengl-java-class</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <!-- dependencias -->
+  <name>opengl-java-class</name>
+  <url>http://maven.apache.org</url>
+
+  <!-- propiedades que se reutilizan en el pom
+  aqui se define la version de java, tambien del LWJGL (libreria que java se comunica con openlg)
+  -->
+  <properties>
+    <!-- Version de java para compilar -->
+    <maven.compiler.source>17</maven.compiler.source>
+    <!-- Version del bytecode generado -->
+    <maven.compiler.target>17</maven.compiler.target>
+    <!-- Version de LWJGL -->
+    <lwjgl.version>3.3.3</lwjgl.version>
+    <!-- Clase que contiene un public static void main -->
+    <mainClass>com.graphics.Vehiculo</mainClass>
+  </properties>
+
+  <!-- Bibliotecas que el proyecto necesita para compilar y ejecutar -->
+  <dependencies>
+    <!-- Junit: biblioteca para escribir pruebas unitarias-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- LWJGL: son los binding de java para openGL y GLFW
+    Tres modulos principales:
+    - lwglg = el nucleo para la carga de la biblioteca nativa de openLG
+    - lwjlg-glfw = crear ventanas, teclado, raton
+    - lwjgl-openGL = llamadas a openLG
+     -->
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>${lwjgl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-glfw</artifactId>
+      <version>${lwjgl.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-opengl</artifactId>
+      <version>${lwjgl.version}</version>
+    </dependency>
+
+    <!-- Nativos de Windows -->
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>${lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-glfw</artifactId>
+      <version>${lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>org.lwjgl</groupId>
+      <artifactId>lwjgl-opengl</artifactId>
+      <version>${lwjgl.version}</version>
+      <classifier>natives-windows</classifier>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <!-- Compilador Java -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <!-- Ejecutar la aplicación -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+
+</project>
